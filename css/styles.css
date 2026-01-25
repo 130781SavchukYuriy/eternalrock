@@ -169,49 +169,42 @@ body::before {
   z-index: 1;
 }
 
-/* Центральная часть с черепом */
+/* Центральная часть с черепом - УПРОЩЕННЫЙ ВАРИАНТ */
 .record-center {
-  position: absolute !important;
-  width: 35% !important;
-  height: 35% !important;
-  background: linear-gradient(135deg, #222 0%, #111 100%) !important;
-  border-radius: 50% !important;
-  z-index: 10 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  position: absolute;
+  width: 35%;
+  height: 35%;
+  background: linear-gradient(135deg, #222 0%, #111 100%);
+  border-radius: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow:
     0 0 30px rgba(0, 0, 0, 0.8),
     inset 0 0 20px rgba(0, 0, 0, 0.9),
-    0 0 0 5px rgba(255, 94, 0, 0.3) !important;
-  border: 4px solid #333 !important;
-  overflow: hidden !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
+    0 0 0 5px rgba(255, 94, 0, 0.3);
+  border: 4px solid #333;
+  overflow: hidden;
 }
 
-/* Иконка черепа */
+/* Иконка черепа - ИСПРАВЛЕННАЯ ВЕРСИЯ */
 .skull-icon {
-  position: absolute; /* Делаем абсолютное позиционирование */
-  top: 50%;
-  left: 50%;
   width: 70%;
   height: 35%;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7));
   transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
+    transform 0.3s ease,
+    filter 0.3s ease;
   z-index: 11;
-  transform: translate(-50%, -50%) scale(1); /* Центрируем и устанавливаем начальный масштаб */
 }
 
 /* Свечение черепа */
 .skull-glow {
   position: absolute;
   width: 100%;
-  height: 50%;
+  height: 100%;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -221,80 +214,6 @@ body::before {
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 9;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Центрируем свечение */
-}
-
-/* Анимация пульсации при воспроизведении */
-.skull-icon-playing {
-  animation: skull-pulse-fixed 2s ease-in-out infinite !important;
-}
-
-@keyframes skull-pulse-fixed {
-  0% {
-    transform: translate(-50%, -50%) scale(1) !important;
-    filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8)) !important;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.05) !important;
-    filter: drop-shadow(0 0 20px rgba(255, 94, 0, 1))
-      drop-shadow(0 0 30px rgba(255, 94, 0, 0.7)) !important;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1) !important;
-    filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8)) !important;
-  }
-}
-
-.skull-glow-playing {
-  opacity: 0.6;
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
-/* Пульсация черепа */
-@keyframes skull-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(1); /* Учитываем центровку */
-    filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8));
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.05); /* Пульсация относительно центра */
-    filter: drop-shadow(0 0 20px rgba(255, 94, 0, 1))
-      drop-shadow(0 0 30px rgba(255, 94, 0, 0.7));
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1); /* Учитываем центровку */
-    filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8));
-  }
-}
-
-/* Пульсация свечения */
-@keyframes glow-pulse {
-  0% {
-    opacity: 0.4;
-    background: radial-gradient(
-      circle,
-      rgba(255, 94, 0, 0.3) 0%,
-      transparent 70%
-    );
-  }
-  50% {
-    opacity: 0.8;
-    background: radial-gradient(
-      circle,
-      rgba(255, 94, 0, 0.5) 0%,
-      transparent 70%
-    );
-  }
-  100% {
-    opacity: 0.4;
-    background: radial-gradient(
-      circle,
-      rgba(255, 94, 0, 0.3) 0%,
-      transparent 70%
-    );
-  }
 }
 
 /* Концентрические круги */
@@ -376,11 +295,6 @@ body::before {
   animation: rotate 3s linear infinite;
 }
 
-.skull-glow-playing {
-  opacity: 0.6;
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -390,6 +304,7 @@ body::before {
   }
 }
 
+/* Анимация пульсации черепа - ИСПРАВЛЕННАЯ */
 @keyframes skull-pulse {
   0% {
     transform: scale(1);
@@ -406,6 +321,7 @@ body::before {
   }
 }
 
+/* Анимация пульсации свечения */
 @keyframes glow-pulse {
   0% {
     opacity: 0.4;
@@ -431,6 +347,16 @@ body::before {
       transparent 70%
     );
   }
+}
+
+/* Классы для анимации черепа при воспроизведении */
+.skull-icon-playing {
+  animation: skull-pulse 2s ease-in-out infinite;
+}
+
+.skull-glow-playing {
+  opacity: 0.6;
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 
 /* Элементы управления */
@@ -527,42 +453,6 @@ body::before {
 
 /* Информация о станции */
 .station-info {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 15px;
-  margin-top: 20px;
-  text-align: left;
-  width: 100%; /* Растягиваем на всю ширину контейнера */
-  box-sizing: border-box; /* Учитываем padding в общей ширине */
-}
-
-/* Для параграфов внутри station-info - убираем отступы и делаем flex */
-.station-info p {
-  margin: 10px 0;
-  font-size: 1rem;
-  opacity: 0.9;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%; /* Каждый параграф на всю ширину */
-}
-
-/* Для иконок в station-info */
-.station-info i {
-  color: #ff5e00;
-  width: 20px;
-  text-align: center;
-  flex-shrink: 0; /* Запрещаем иконкам сжиматься */
-}
-
-/* Для текста жанра - делаем его гибким */
-.station-info p:nth-child(2) {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap; /* Позволяем переносить на новую строку при необходимости */
-}
-
-.station-info {
   display: flex;
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.05);
@@ -635,57 +525,13 @@ body::before {
 #playlist-name {
   color: #ff9d5c;
   font-weight: normal;
-  font-size: inherit; /* Наследуем размер шрифта */
-  text-transform: none; /* Убираем верхний регистр */
+  font-size: inherit;
+  text-transform: none;
   margin-left: 5px;
-  flex: 1; /* Занимает все доступное пространство */
-  min-width: 0; /* Позволяет сжиматься */
-  overflow-wrap: break-word; /* Позволяет переносить длинные слова */
-  word-break: break-word; /* Переносит длинные слова */
-}
-
-/* Для мобильных устройств - адаптивные стили */
-@media (max-width: 768px) {
-  .station-info {
-    padding: 15px;
-    margin-top: 15px;
-  }
-
-  .station-info p {
-    font-size: 0.9rem;
-    gap: 8px;
-    flex-wrap: wrap; /* Позволяем переносить на мобильных */
-  }
-
-  #playlist-name {
-    margin-left: 0;
-    margin-top: 2px;
-    width: 100%; /* На мобильных занимает всю строку */
-  }
-}
-
-@media (max-width: 480px) {
-  .station-info {
-    padding: 12px;
-    margin-top: 12px;
-  }
-
-  .station-info p {
-    font-size: 0.85rem;
-    gap: 6px;
-  }
-}
-
-.station-info i {
-  color: #ff5e00;
-  width: 20px;
-}
-
-.station-info p:hover #playlist-name {
-  background: rgba(255, 94, 0, 0.2);
-  border-color: rgba(255, 94, 0, 0.4);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 94, 0, 0.2);
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Анимация обновления плейлиста */
@@ -712,91 +558,6 @@ body::before {
   width: 100%;
   font-size: 0.9rem;
   opacity: 0.8;
-}
-
-.stream-url {
-  margin-top: 10px;
-}
-
-.stream-url a {
-  color: #ff9d5c;
-  text-decoration: none;
-  margin-left: 5px;
-}
-
-.stream-url a:hover {
-  text-decoration: underline;
-  color: #ff5e00;
-}
-
-/* Для браузеров без поддержки backdrop-filter */
-@supports not (backdrop-filter: blur(5px)) {
-  .container {
-    background-color: rgba(20, 20, 30, 0.95);
-  }
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .header h1 {
-    font-size: 2.2rem;
-  }
-
-  .record-container {
-    width: 280px;
-    height: 280px;
-  }
-
-  .record-center {
-    width: 40%;
-    height: 40%;
-  }
-
-  .skull-icon {
-    width: 75%;
-    height: 75%;
-  }
-
-  .status {
-    font-size: 1.1rem;
-    padding: 15px 20px;
-  }
-
-  .volume-slider {
-    width: 150px;
-  }
-
-  #playlist-name {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.8rem;
-  }
-
-  .header p {
-    font-size: 1rem;
-  }
-
-  .record-container {
-    width: 250px;
-    height: 250px;
-  }
-
-  .record-center {
-    width: 45%;
-    height: 45%;
-  }
-
-  .station-info p {
-    font-size: 0.9rem;
-  }
-
-  .container {
-    padding: 20px;
-  }
 }
 
 /* Анимация при нажатии */
@@ -859,30 +620,6 @@ body::before {
   font-size: 1.2rem;
 }
 
-/* Адаптивность для кнопок */
-@media (max-width: 768px) {
-  .footer-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .telegram-btn,
-  .sponsor-btn {
-    width: 100%;
-    max-width: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .telegram-btn,
-  .sponsor-btn {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    min-width: 160px;
-  }
-}
-
 /* ========== СТИЛИ ДЛЯ БЕГУЩЕЙ СТРОКИ С ТРЕКОМ ========== */
 
 /* Контейнер для статуса с бегущей строкой */
@@ -905,11 +642,6 @@ body::before {
   font-size: 1.5rem;
   min-width: 24px;
   text-align: center;
-}
-
-.playing .status i {
-  animation: pulse 1.5s infinite;
-  color: #00ff88;
 }
 
 /* Контейнер для бегущей строки */
@@ -964,22 +696,6 @@ body::before {
   padding: 0 10px;
 }
 
-/* Анимация пульсации для иконки play */
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-}
-
 /* Эффект при появлении трека */
 .track-appear {
   animation: trackAppear 0.5s ease-out;
@@ -993,58 +709,6 @@ body::before {
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* Показ времени обновления трека (опционально) */
-.track-time {
-  position: absolute;
-  bottom: -20px;
-  right: 15px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.4);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.status:hover .track-time {
-  opacity: 1;
-}
-
-/* Адаптивность для бегущей строки */
-@media (max-width: 768px) {
-  .status {
-    padding: 15px 20px;
-    font-size: 1.1rem;
-    gap: 10px;
-  }
-
-  .marquee-track {
-    animation-duration: 20s !important;
-  }
-
-  .marquee-track.long {
-    animation-duration: 25s !important;
-  }
-
-  .marquee-track.very-long {
-    animation-duration: 30s !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .status {
-    padding: 12px 15px;
-    font-size: 1rem;
-    gap: 8px;
-  }
-
-  .status i {
-    font-size: 1.3rem;
-  }
-
-  .marquee-container {
-    height: 20px;
   }
 }
 
@@ -1077,59 +741,125 @@ body::before {
   font-family: "Metal Mania", "Arial Black", sans-serif;
 }
 
-/* Простое исправление для мобильных */
+/* Визуализатор */
+.my_visualizer {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: 120px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+/* Классы для эффектов наведения */
+.record-hover {
+  transform: scale(1.02);
+}
+
+.record-click {
+  transform: scale(0.97);
+}
+
+/* Классы для черепа */
+.skull-default {
+  filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7));
+}
+
+.skull-hover {
+  filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.7));
+}
+
+.skull-click {
+  filter: drop-shadow(0 0 12px rgba(255, 94, 0, 0.9));
+}
+
+.skull-glow-hover {
+  opacity: 0.3;
+}
+
+.skull-glow-active {
+  opacity: 0.6;
+}
+
+/* Адаптивность */
 @media (max-width: 768px) {
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  .record-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .record-center {
+    width: 40%;
+    height: 40%;
+  }
+
   .status {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-    padding: 15px;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    gap: 10px;
   }
 
-  .status > * {
-    width: 100%;
-    text-align: center;
-    box-sizing: border-box;
-    overflow: hidden;
+  .volume-slider {
+    width: 150px;
   }
 
-  .marquee-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 10px 0;
-    overflow: hidden;
-    box-sizing: border-box;
+  #playlist-name {
+    font-size: 1rem;
   }
-
+  
+  /* Адаптивность для бегущей строки */
   .marquee-track {
-    animation: marquee 10s linear infinite;
-    font-size: 0.9rem;
-    max-width: 100%;
-    box-sizing: border-box;
+    animation-duration: 20s !important;
+  }
+
+  .marquee-track.long {
+    animation-duration: 25s !important;
+  }
+
+  .marquee-track.very-long {
+    animation-duration: 30s !important;
   }
 }
 
-/* Еще более строгие ограничения для маленьких экранов */
 @media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.8rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+  }
+
+  .record-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .station-info p {
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 20px;
+  }
+  
   .status {
-    padding: 12px 10px;
-    gap: 6px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    gap: 8px;
+  }
+
+  .status i {
+    font-size: 1.3rem;
   }
 
   .marquee-container {
-    margin: 8px 0;
-  }
-
-  .marquee-track {
-    font-size: 0.85rem;
-    animation-duration: 8s !important;
-    padding-left: 50%;
+    height: 20px;
   }
 }
 
@@ -1143,36 +873,4 @@ body::before {
     padding-left: 0;
     transform: none !important;
   }
-}
-
-.my_visualizer {
-  display: block;
-  width: 100%;
-  max-width: 500px;
-  height: 120px;
-
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.skull {
-  transition:
-    transform 0.12s ease-out,
-    filter 0.12s ease-out;
-}
-
-#skullIcon {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  width: 70% !important;
-  height: 35% !important;
-  object-fit: contain !important;
-  filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7)) !important;
-  z-index: 11 !important;
-  transform: translate(-50%, -50%) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
 }
