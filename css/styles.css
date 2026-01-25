@@ -458,9 +458,8 @@ body::before {
   background: rgba(255, 255, 255, 0.05);
   padding: 20px;
   border-radius: 15px;
-  gap: 30px; /* Увеличить отступ между левой и правой частями */
-  width: 100%; /* Убедиться, что занимает всю ширину */
-  margin-top: 20px;
+  gap: 20px;
+  flex-wrap: wrap; /* Добавляем возможность переноса */
 }
 
 .station-left {
@@ -786,34 +785,66 @@ body::before {
 }
 
 /* Адаптивность */
+/* Мобильная версия */
 @media (max-width: 768px) {
-  .header h1 {
-    font-size: 2.2rem;
+  .station-info {
+    flex-direction: column; /* Вертикальное расположение */
+    padding: 15px;
   }
 
-  .record-container {
-    width: 280px;
-    height: 280px;
+  .station-left {
+    order: 1; /* Станция, жанр, поток - первый */
   }
 
-  .record-center {
-    width: 40%;
-    height: 40%;
+  .station-right {
+    order: 2; /* Расписание - второй */
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 94, 0, 0.3);
   }
 
-  .status {
-    padding: 15px 20px;
+  /* Заголовок расписания по центру */
+  .station-right h4 {
+    text-align: center;
+    margin-bottom: 12px;
     font-size: 1.1rem;
-    gap: 10px;
   }
 
-  .volume-slider {
-    width: 150px;
+  /* Улучшаем читаемость пунктов расписания */
+  .schedule-list li {
+    display: flex;
+    align-items: flex-start;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  #playlist-name {
-    font-size: 1rem;
+  .schedule-list li:last-child {
+    border-bottom: none;
   }
+
+  .schedule-list i {
+    margin-top: 2px; /* Выравнивание иконки */
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .station-info {
+    padding: 12px;
+  }
+
+  .schedule-list li {
+    font-size: 0.8rem;
+    padding: 5px 0;
+  }
+
+  /* Можно сделать 2 колонки для расписания на маленьких экранах */
+  .schedule-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
   
   /* Адаптивность для бегущей строки */
   .marquee-track {
