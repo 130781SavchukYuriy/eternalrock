@@ -191,21 +191,25 @@ body::before {
 
 /* Иконка черепа */
 .skull-icon {
+  position: absolute; /* Делаем абсолютное позиционирование */
+  top: 50%;
+  left: 50%;
   width: 70%;
-  height: 35%; /* В два раза тоньше */
+  height: 35%;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7));
   transition:
     transform 0.12s ease,
     filter 0.12s ease;
   z-index: 11;
+  transform: translate(-50%, -50%) scale(1); /* Центрируем и устанавливаем начальный масштаб */
 }
 
 /* Свечение черепа */
 .skull-glow {
   position: absolute;
   width: 100%;
-  height: 50%; /* компактнее по вертикали */
+  height: 50%;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -215,6 +219,9 @@ body::before {
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 9;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрируем свечение */
 }
 
 /* Анимация пульсации при воспроизведении */
@@ -232,16 +239,16 @@ body::before {
 /* Пульсация черепа */
 @keyframes skull-pulse {
   0% {
-    transform: scaleY(1) scaleX(1);
+    transform: translate(-50%, -50%) scale(1); /* Учитываем центровку */
     filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8));
   }
   50% {
-    transform: scaleY(1.1) scaleX(1.05); /* вертикаль чуть сильнее */
+    transform: translate(-50%, -50%) scale(1.05); /* Пульсация относительно центра */
     filter: drop-shadow(0 0 20px rgba(255, 94, 0, 1))
       drop-shadow(0 0 30px rgba(255, 94, 0, 0.7));
   }
   100% {
-    transform: scaleY(1) scaleX(1);
+    transform: translate(-50%, -50%) scale(1); /* Учитываем центровку */
     filter: drop-shadow(0 0 10px rgba(255, 94, 0, 0.8));
   }
 }
