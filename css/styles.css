@@ -188,10 +188,10 @@ body::before {
   overflow: hidden;
 }
 
-/* Иконка черепа - ИСПРАВЛЕННАЯ ВЕРСИЯ */
+/* Иконка черепа */
 .skull-icon {
-  width: 70%;
-  height: 35%;
+  width: 1000%;
+  height: 65%;
   object-fit: contain;
   filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.7));
   transition:
@@ -459,7 +459,10 @@ body::before {
   padding: 20px;
   border-radius: 15px;
   gap: 20px;
-  flex-wrap: wrap; /* Добавляем возможность переноса */
+  flex-wrap: wrap;
+  width: 100%; 
+  max-width: 900px; 
+  margin: 0 auto; 
 }
 
 .station-left {
