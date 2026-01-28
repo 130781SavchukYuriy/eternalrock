@@ -631,26 +631,32 @@ body::before {
 
 /* ========== СТИЛИ ДЛЯ БЕГУЩЕЙ СТРОКИ С ТРЕКОМ ========== */
 
-/* Контейнер для статуса с бегущей строкой */
+/* Основной контейнер статуса */
 .status {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 1.3rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Разрешаем перенос на мобильных */
+  gap: 8px 12px; /* Меньшие отступы */
+  font-size: 1.1rem; /* Немного меньше на всех устройствах */
   background: rgba(255, 255, 255, 0.08);
-  padding: 18px 25px;
+  padding: 12px 20px; /* Меньшие отступы */
   border-radius: 50px;
-  margin-bottom: 25px;
-  min-height: 65px;
+  margin-bottom: 20px;
+  min-height: auto; /* Убираем фиксированную высоту */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
 }
 
 .status i {
   color: #ff5e00;
-  font-size: 1.5rem;
-  min-width: 24px;
+  font-size: 1.3rem; 
+  min-width: 20px; 
   text-align: center;
+  flex-shrink: 0; 
 }
 
 /* Контейнер для бегущей строки */
@@ -658,9 +664,12 @@ body::before {
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  flex: 1;
-  height: 24px;
+  flex: 1 1 auto; /* Гибкая ширина */
+  min-width: 100px; /* Минимальная ширина */
+  height: 22px; /* Немного меньше */
   margin: 0 5px;
+  display: flex;
+  align-items: center;
 }
 
 /* Сама бегущая строка */
@@ -671,6 +680,8 @@ body::before {
   font-weight: 500;
   color: #fff;
   text-shadow: 0 0 5px rgba(255, 94, 0, 0.3);
+  font-size: 1rem; /* Соответствует статусу */
+  line-height: 1.2;
 }
 
 /* Пауза анимации при наведении */
@@ -699,10 +710,14 @@ body::before {
 
 /* Текст по умолчанию (когда радио выключено) */
 #statusText {
-  flex: 1;
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
-  padding: 0 10px;
+  padding: 0 5px;
+  flex: 1;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Эффект при появлении трека */
@@ -735,11 +750,13 @@ body::before {
   overflow: hidden !important;
 }
 
+/* Текст "Сейчас в эфире:" */
 .status-label {
   color: #ff9d5c;
   font-weight: 600;
-  margin-right: 5px;
   white-space: nowrap;
+  flex-shrink: 0; /* Не сжимается */
+  font-size: 1rem; /* Еще меньше на мобильных */
 }
 
 /* Подключаем шрифт */
@@ -791,129 +808,129 @@ body::before {
   opacity: 0.6;
 }
 
-/* Адаптивность */
-/* Мобильная версия */
+/* ========== МЕДИА-ЗАПРОСЫ ДЛЯ МОБИЛЬНЫХ ========== */
+
 @media (max-width: 768px) {
-  .station-info {
-    flex-direction: column; /* Вертикальное расположение */
-    padding: 15px;
-  }
-
-  .station-left {
-    order: 1; /* Станция, жанр, поток - первый */
-  }
-
-  .station-right {
-    order: 2; /* Расписание - второй */
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 94, 0, 0.3);
-  }
-
-
-  .station-right h4 {
-    text-align: left;
-    margin-bottom: 12px;
-    font-size: 1.1rem;
-    padding-left: 24px; /* 16px (ширина иконки) + 8px (gap) */
+  .status {
+    padding: 10px 15px; /* Еще меньше отступы */
+    border-radius: 30px; /* Более круглый на мобильных */
+    gap: 6px 10px; /* Меньшие отступы */
+    font-size: 1rem; /* Меньше шрифт */
   }
   
-  /* Улучшаем читаемость пунктов расписания */
-  .schedule-list li {
-    display: flex;
-    align-items: flex-start;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  .status i {
+    font-size: 1.1rem; /* Меньше иконки */
   }
-
-  .schedule-list li:last-child {
-    border-bottom: none;
+  
+  .status-label {
+    font-size: 0.9rem; /* Меньше метка */
   }
-
-  .schedule-list i {
-    margin-top: 2px; /* Выравнивание иконки */
+  
+  .marquee-container {
+    height: 20px; /* Меньше высота */
+    min-width: 80px; /* Меньшая минимальная ширина */
+  }
+  
+  .marquee-track {
+    font-size: 0.95rem; /* Меньше шрифт трека */
+  }
+  
+  #statusText {
+    font-size: 0.95rem;
   }
 }
 
-/* Для очень маленьких экранов */
+@media (max-width: 600px) {
+  /* На очень узких экранах меняем макет */
+  .status {
+    flex-direction: row; /* Оставляем строкой, но с переносом */
+    justify-content: flex-start;
+    padding: 8px 12px;
+    min-height: 50px; /* Фиксированная минимальная высота */
+  }
+  
+  /* Скрываем иконку на очень узких экранах */
+  .status i {
+    display: none;
+  }
+  
+  .status-label {
+    font-size: 0.85rem;
+    margin-right: 5px;
+  }
+  
+  .marquee-container {
+    height: 18px;
+    margin-left: 0;
+  }
+  
+  .marquee-track {
+    font-size: 0.9rem;
+    animation-duration: 20s !important; /* Быстрее анимация */
+  }
+}
+
 @media (max-width: 480px) {
-  .station-info {
-    padding: 12px;
-  }
-
-  .schedule-list li {
-    font-size: 0.8rem;
-    padding: 5px 0;
-  }
-
-  /* Можно сделать 2 колонки для расписания на маленьких экранах */
-  .schedule-list {
-    display: grid;
-    grid-template-columns: 1fr;
+  .status {
+    padding: 8px 10px;
+    border-radius: 25px;
     gap: 5px;
   }
-}
   
-  /* Адаптивность для бегущей строки */
-  .marquee-track {
-    animation-duration: 20s !important;
-  }
-
-  .marquee-track.long {
-    animation-duration: 25s !important;
-  }
-
-  .marquee-track.very-long {
-    animation-duration: 30s !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.8rem;
-  }
-
-  .header p {
-    font-size: 1rem;
-  }
-
-  .record-container {
-    width: 250px;
-    height: 250px;
-  }
-
-  .station-info p {
-    font-size: 0.9rem;
-  }
-
-  .container {
-    padding: 20px;
+  .status-label {
+    font-size: 0.8rem;
   }
   
-  .status {
-    padding: 12px 15px;
-    font-size: 1rem;
-    gap: 8px;
-  }
-
-  .status i {
-    font-size: 1.3rem;
-  }
-
   .marquee-container {
-    height: 20px;
+    height: 16px;
+    min-width: 60px;
+  }
+  
+  .marquee-track {
+    font-size: 0.85rem;
+    animation-duration: 18s !important; /* Еще быстрее */
+  }
+  
+  #statusText {
+    font-size: 0.85rem;
   }
 }
 
-/* Для очень маленьких экранов можно отключить анимацию */
+/* Для очень маленьких экранов - упрощаем */
 @media (max-width: 360px) {
+  .status {
+    padding: 6px 8px;
+    min-height: 44px;
+  }
+  
+  .status-label {
+    display: none; /* Скрываем метку на самых маленьких экранах */
+  }
+  
   .marquee-track {
-    animation: none !important;
+    animation: none !important; /* Отключаем анимацию */
+    padding-left: 0; /* Убираем отступ для анимации */
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    padding-left: 0;
-    transform: none !important;
+    width: 100%;
+  }
+  
+  .marquee-container {
+    width: 100%;
+    text-align: center;
   }
 }
 
+/* Для ландшафтной ориентации на мобильных */
+@media (max-height: 600px) and (orientation: landscape) {
+  .status {
+    padding: 6px 10px;
+    margin-bottom: 10px;
+    min-height: 40px;
+  }
+  
+  .marquee-container {
+    height: 18px;
+  }
+}
