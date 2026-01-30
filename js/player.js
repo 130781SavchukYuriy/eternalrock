@@ -104,19 +104,19 @@ function setupMobileAnimation() {
 // при изменении размера окна
 window.addEventListener('resize', setupMobileAnimation);
 
-// Форматирывание символов UTF
-function decodeHtmlEntities(str) {
-  const txt = document.createElement("textarea");
-  txt.innerHTML = str;
-  return txt.value;
-}
-
 // Функция для получения текущего трека и плейлиста (объединенная)
 async function getCurrentTrackAndPlaylist() {
   try {
     const apiUrl = `https://myradio24.com/users/${CONFIG.radioId}/status.json`;
     const response = await fetch(apiUrl);
     const data = await response.json();
+
+    // Форматирывание символов UTF
+function decodeHtmlEntities(str) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = str;
+  return txt.value;
+}
 
     /* ================== ТЕКУЩИЙ ТРЕК ================== */
     if (data && data.song) {
