@@ -55,7 +55,7 @@ class SlideShow {
     this.nextBtn = document.querySelector(".slide-nav.next");
     this.currentSlide = 0;
     this.slideInterval = null;
-    this.slideDuration = 8000; // 8 секунд
+    this.slideDuration = 20000; // 8 секунд
     this.isFullscreen = false;
 
     this.init();
